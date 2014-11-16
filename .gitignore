@@ -60,6 +60,8 @@ perl6-m
 perl6-m.bat
 perl6-debug-m
 perl6-debug-m.bat
+perl6-b
+perl6-b.exe
 t/localtest.data
 t/spec
 perl6.c
