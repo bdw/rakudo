@@ -99,8 +99,12 @@ $(M_PERL6_OPS_DLL): $(M_PERL6_OPS_SRC) $(M_PERL6_CONT_SRC) Makefile
 	$(M_LD) @moar::ldswitch@ -L$(PREFIX)/lib -lmoar @moar::ldshared@ $(M_LDFLAGS) @moar::ldout@$(M_PERL6_OPS_DLL) $(M_PERL6_OPS_OBJ) $(M_PERL6_CONT_OBJ) @moarimplib@
 
 
-perl6-b@exe@: src/perl6-m.c
-	 $(M_CC) $(M_CFLAGS) $(M_CCINC) $(M_LDFLAGS) -L$(PREFIX)@slash@lib -lmoar -DPREFIX='"$(PREFIX)"' @moar::ccout@ $@ src/perl6-m.c
+src/gen/perl6-m.h: perl6.moarvm
+	$(PERL) tools/build/statify.pl $@ perl6.moarvm
+
+perl6-b@exe@: src/perl6-m.c src/gen/perl6-m.h
+	 $(M_CC) $(M_CFLAGS) $(M_CCINC) -Isrc/gen $(M_LDFLAGS) -L$(PREFIX)@slash@lib -lmoar \
+	     -DPREFIX='"$(PREFIX)"' @moar::ccout@ $@ src/perl6-m.c
 
 $(PERL6_ML_MOAR): src/Perl6/ModuleLoader.nqp src/vm/moar/ModuleLoaderVMConfig.nqp
 	$(M_NQP) $(M_GEN_CAT) src/vm/moar/ModuleLoaderVMConfig.nqp src/Perl6/ModuleLoader.nqp > src/gen/m-ModuleLoader.nqp
