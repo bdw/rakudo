@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include "perl6-m.h"
 
-#define NQP_LIB_DIR PREFIX "/languages/nqp/lib"
-#define PL6_LIB_DIR PREFIX "/languages/perl6/lib"
-#define PL6_RUN_DIR PREFIX "/languages/perl6/runtime"
+#define NQP_LIB_DIR PREFIX "/share/nqp/lib"
+#define PL6_LIB_DIR PREFIX "/share/perl6/lib"
+#define PL6_RUN_DIR PREFIX "/share/perl6/runtime"
 
 /* This callback is passed to the interpreter code. It takes care of making
  * the initial invocation. */
